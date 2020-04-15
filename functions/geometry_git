@@ -60,7 +60,7 @@ geometry_git_conflicts() {
   [[ -z "$conflicts" ]] && return
 
   _grep=${GEOMETRY_GIT_GREP:=${commands[rg]:=${commands[ag]:=${commands[grep]}}}}
-  conflict_list=$($_grep -cH '^=======$' $conflicts)
+  conflict_list=$(echo $conflicts | xargs $_grep -cH '^=======$')
 
   raw_file_count="${#${(@f)conflict_list}}"
   file_count=${raw_file_count##*( )}
